@@ -15,5 +15,7 @@ app.get('/api/health', (_, res) => res.json({ ok: true }));
 app.use((err, _req, res, _next) => { console.error(err); res.status(500).json({ message: 'Something went wrong on the server.' }); });
 
 mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lumen')
-  .then(() => app.listen(process.env.PORT || 5000, () => console.log('API running on :' + (process.env.PORT || 5000))))
-  .catch((e) => { console.error('MongoDB connection failed:', e.message); process.exit(1); });
+  .then(() => console.log('MongoDB connected'))
+  .catch((e) => console.error('MongoDB connection failed:', e.message));
+
+module.exports = app;
